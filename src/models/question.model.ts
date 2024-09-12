@@ -11,7 +11,12 @@ export interface IQuestion {
 
 const QuestionSchema = new mongoose.Schema({
 	text: { type: Schema.Types.String, required: true },
-	author: { type: Schema.Types.ObjectId, ref: User, required: false },
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: User,
+		required: false,
+		default: null,
+	},
 	options: { type: [Schema.Types.String], required: true },
 	keywords: { type: [Schema.Types.String], required: true },
 	correctAnswerIndex: { type: Schema.Types.Number, required: true },
