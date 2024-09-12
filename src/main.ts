@@ -4,6 +4,7 @@ import { DEVELOPMENT, server } from './config/config';
 import connectDb from './config/db';
 import questionApi from './routes/api/question.route';
 import quizApi from './routes/api/quiz.route';
+import userApi from './routes/api/user.route';
 import morgan from 'morgan';
 import { setupSwagger } from './swagger/swagger';
 
@@ -28,19 +29,24 @@ app.use(morgan('dev'));
 // Routes API
 app.use('/api/questions', questionApi);
 app.use('/api/quizzes', quizApi);
+app.use('/api/users', userApi);
 
 app.listen(server.port, async () => {
 	// Connect to MongoDB
 	await connectDb();
 
-	console.info(`Listening on PORT ${server.port}`);
+	console.info(`Listening on PORT ${server.port}. 🚀`);
+	console.info(`Environment: ${DEVELOPMENT ? 'Development' : 'Production'}`);
+	console.info(`Origin: ${server.origin}`);
+	console.info(`Database: ${server.databaseUrl}`);
+	console.info(`Run at: ${server.schema}://${server.host}:${server.port}`);
 
 	if (DEVELOPMENT) {
 		// Swagger
 		setupSwagger(app);
 
 		console.info(
-			`Swagger UI available at http://${server.host}:${server.port}/api-docs`,
+			`Swagger UI available at ${server.schema}://${server.host}:${server.port}/api-docs`,
 		);
 	}
 });
