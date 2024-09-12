@@ -1,0 +1,33 @@
+{
+	"name": "assignment-3",
+	"version": "1.0.0",
+	"description": "User Authentication",
+	"scripts": {
+		"build": "tsc --build",
+		"dev": "nodemon ./src/main.ts",
+		"start": "node ./dist/main.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "SDN302 - SE17C",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/cors": "^2.8.17",
+		"@types/express": "^4.17.21",
+		"@types/morgan": "^1.9.9",
+		"@types/swagger-jsdoc": "^6.0.4",
+		"@types/swagger-ui-express": "^4.1.6",
+		"dotenv": "^16.4.5",
+		"nodemon": "^3.1.4",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.5.4"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.19.2",
+		"mongoose": "^8.6.1",
+		"morgan": "^1.10.0"
+	}
+}
