@@ -3,7 +3,7 @@ import dotnev from 'dotenv';
 dotnev.config();
 
 export const DEVELOPMENT: boolean =
-	process.env['APP_ENV'] === 'development' || false;
+	process.env['APP_ENV'] === 'development' || true;
 
 export const SCHEMA: string = process.env['SCHEMA'] || 'http';
 export const SERVER_HOST: string = process.env['SERVER_HOST'] || 'localhost';

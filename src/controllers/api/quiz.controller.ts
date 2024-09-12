@@ -120,7 +120,7 @@ export const createOneQuestionForQuiz = async (req: Request, res: Response) => {
 		const question = new Question(req.body);
 		const newQuestion = await question.save();
 
-		quiz.questions.push(newQuestion._id);
+		quiz.questions.push(newQuestion._id.toString());
 		await quiz.save();
 
 		return res.status(201).json(newQuestion);
