@@ -13,4 +13,4 @@ const QuizSchema = new mongoose.Schema({
 	questions: { type: [Schema.Types.ObjectId], required: true, ref: Question },
 });
 
-export const Quiz = mongoose.model('Quiz', QuizSchema);
+export const Quiz = mongoose.model<IQuiz>('Quiz', QuizSchema);
