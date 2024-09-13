@@ -18,10 +18,16 @@ export const SERVER_ORIGIN: string = DEVELOPMENT
 export const DATABASE_URL: string =
 	process.env['DATABASE_URL'] || 'mongodb://localhost:27017';
 
+export const JWT_SECRET: string = process.env['JWT_SECRET'] || 'secret';
+
+export const JWT_EXPIRATION: string = process.env['JWT_EXPIRATION'] || '1h';
+
 export const server = {
 	schema: SCHEMA,
 	host: SERVER_HOST,
 	port: SERVER_PORT,
 	origin: SERVER_ORIGIN,
 	databaseUrl: DATABASE_URL,
+	jwtSecret: JWT_SECRET,
+	jwtExpiration: JWT_EXPIRATION,
 };

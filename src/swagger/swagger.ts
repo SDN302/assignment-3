@@ -4,7 +4,7 @@ import { Express } from 'express';
 
 const swaggerOptions = {
 	swaggerDefinition: {
-		openapi: '3.0.0',
+		openapi: '3.1.0',
 		info: {
 			version: '1.0.0',
 			title: 'SDN302 - Assignment 3',
@@ -13,6 +13,20 @@ const swaggerOptions = {
 				name: 'Minh Vương',
 			},
 		},
+		components: {
+			securitySchemes: {
+				bearerAuth: {
+					type: 'http',
+					scheme: 'bearer',
+					bearerFormat: 'JWT',
+				},
+			},
+		},
+		security: [
+			{
+				bearerAuth: [],
+			},
+		],
 		schemes: ['http', 'https'],
 	},
 	apis: ['src/routes/api/*.ts'],
