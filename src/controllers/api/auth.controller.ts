@@ -1,0 +1,39 @@
+import { Request, Response } from 'express';
+import { getUserByUsername } from '../../services/user.service';
+import { hashPassword } from '../../services/utils.service';
+import { generateJWTToken } from '../../services/auth.service';
+
+export const login = async (req: Request, res: Response) => {
+	try {
+		const { username, password } = req.body;
+
+		if (!username || !password) {
+			return res
+				.status(400)
+				.json({ error: 'Username and password are required' });
+		}
+
+		const user = await getUserByUsername(username);
+
+		if (!user) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		if (user.hashedPassword !== hashPassword(password)) {
+			return res.status(401).json({ error: 'Incorrect password' });
+		}
+
+		let token = generateJWTToken({
+			username: user.username,
+			isAdmin: user.isAdmin || false,
+		});
+
+		if (!token) {
+			return res.status(500).json({ error: 'Error generating token' });
+		}
+
+		return res.status(200).json({ token: token, message: 'Login successful' });
+	} catch (error: any) {
+		return res.status(500).json({ error: error.message });
+	}
+};
