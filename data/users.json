@@ -1,0 +1,18 @@
+[
+	{
+		"_id": {
+			"$oid": "66e476c5c1b6035ffddbcbac"
+		},
+		"username": "admin",
+		"hashedPassword": "21232f297a57a5a743894a0e4a801fc3",
+		"isAdmin": true
+	},
+	{
+		"_id": {
+			"$oid": "66e4773304621c717fc7c94a"
+		},
+		"username": "user",
+		"hashedPassword": "ee11cbb19052e40b07aac0ca060c23ee",
+		"isAdmin": false
+	}
+]
