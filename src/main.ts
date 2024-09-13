@@ -2,9 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { DEVELOPMENT, server } from './config/config';
 import connectDb from './config/db';
-import questionApi from './routes/api/question.route';
-import quizApi from './routes/api/quiz.route';
-import userApi from './routes/api/user.route';
+import apiRouter from './routes/api.routes';
 import morgan from 'morgan';
 import { setupSwagger } from './swagger/swagger';
 
@@ -27,9 +25,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes API
-app.use('/api/questions', questionApi);
-app.use('/api/quizzes', quizApi);
-app.use('/api/users', userApi);
+app.use('/api', apiRouter);
 
 app.listen(server.port, async () => {
 	// Connect to MongoDB
