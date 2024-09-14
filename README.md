@@ -1,4 +1,4 @@
-# Assignment 2
+# Assignment 3
 
 ![GitHub contributors](https://img.shields.io/github/contributors/SDN302/assignment-3)
 ![GitHub top language](https://img.shields.io/github/languages/top/SDN302/assignment-3)
