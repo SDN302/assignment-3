@@ -14,3 +14,33 @@ export const generateJWTToken = (payload: any): string | null => {
 
 	return token;
 };
+
+export const verifyJWTToken = (token: string): boolean => {
+	let isValid = false;
+
+	try {
+		jwt.verify(token, server.jwtSecret);
+
+		isValid = true;
+	} catch (error: any) {
+		console.error(error.message);
+	}
+
+	return isValid;
+};
+
+export const verifyTokenIsAdmin = (token: string): boolean => {
+	let isAdmin = false;
+
+	try {
+		const decodedToken = jwt.verify(token, server.jwtSecret) as any;
+
+		if (decodedToken.isAdmin) {
+			isAdmin = true;
+		}
+	} catch (error: any) {
+		console.error(error.message);
+	}
+
+	return isAdmin;
+};
