@@ -24,6 +24,7 @@ export const login = async (req: Request, res: Response) => {
 		}
 
 		let token = generateJWTToken({
+			_id: user._id,
 			username: user.username,
 			isAdmin: user.isAdmin || false,
 		});

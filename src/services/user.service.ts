@@ -1,8 +1,8 @@
-import { IUser, User } from '../models/user.model';
+import { User } from '../models/user.model';
 
-export const getUserByUsername = async (username: string): Promise<IUser> => {
+export const getUserByUsername = async (username: string) => {
 	try {
-		const user = await User.findOne<IUser>({ username: username });
+		const user = await User.findOne({ username: username });
 
 		if (!user) {
 			throw new Error('User not found');
