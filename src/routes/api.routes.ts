@@ -3,13 +3,16 @@ import authApi from './api/auth.route';
 import questionApi from './api/question.route';
 import quizApi from './api/quiz.route';
 import userApi from './api/user.route';
-import { authenticateToken } from '../middlewares/auth.middleware';
+import {
+	authenticateAdmin,
+	authenticateToken,
+} from '../middlewares/auth.middleware';
 
 const apiRouter = Router();
 
 apiRouter.use('/auth', authApi);
 apiRouter.use('/questions', authenticateToken, questionApi);
 apiRouter.use('/quizzes', authenticateToken, quizApi);
-apiRouter.use('/users', authenticateToken, userApi);
+apiRouter.use('/users', authenticateToken, authenticateAdmin, userApi);
 
 export default apiRouter;
