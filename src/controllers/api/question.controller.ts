@@ -36,6 +36,7 @@ export const getQuestionById = async (req: Request, res: Response) => {
 export const createQuestion = async (req: Request, res: Response) => {
 	try {
 		const question = new Question(req.body);
+		question.author = req.body.author || null;
 
 		const newQuestion = await question.save();
 

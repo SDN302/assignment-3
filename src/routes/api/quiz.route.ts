@@ -5,7 +5,6 @@ import {
 	createQuiz,
 	deleteQuiz,
 	getAllQuizzes,
-	getCapitalQuestions,
 	getQuizById,
 	updateQuiz,
 } from '../../controllers/api/quiz.controller';
@@ -60,24 +59,6 @@ const router = express.Router();
  *         type: array
  *         items:
  *           type: string
- */
-
-/**
- * @swagger
- * definitions:
- *   CapitalQuestion:
- *     type: object
- *     properties:
- *       _id:
- *         type: string
- *       title:
- *         type: string
- *       description:
- *         type: string
- *       questions:
- *         type: array
- *         items:
- *           $ref: '#/definitions/Question'
  */
 
 /**
@@ -274,49 +255,6 @@ router.put('/:quizId', updateQuiz);
  *                   type: string
  */
 router.delete('/:quizId', deleteQuiz);
-
-/**
- * @swagger
- * /api/quizzes/{quizId}/populate:
- *   get:
- *     summary: Populate a quiz with capital questions
- *     description: Populate a quiz with capital questions
- *     tags:
- *       - Quizzes
- *     parameters:
- *       - in: path
- *         name: quizId
- *         required: true
- *         description: ID of the quiz
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: A quiz with capital questions
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/definitions/CapitalQuestion'
- *       404:
- *         description: Quiz not found
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *       500:
- *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- */
-router.get('/:quizId/populate', getCapitalQuestions);
 
 /**
  * @swagger

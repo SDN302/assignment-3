@@ -44,3 +44,15 @@ export const verifyTokenIsAdmin = (token: string): boolean => {
 
 	return isAdmin;
 };
+
+export const decodeTokenPayload = (token: string): any | null => {
+	let payload: any | null = null;
+
+	try {
+		payload = jwt.verify(token, server.jwtSecret);
+	} catch (error: any) {
+		console.error(error.message);
+	}
+
+	return payload;
+};

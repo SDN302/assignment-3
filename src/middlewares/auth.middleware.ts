@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyJWTToken, verifyTokenIsAdmin } from '../services/auth.service';
+import {
+	decodeTokenPayload,
+	verifyJWTToken,
+	verifyTokenIsAdmin,
+} from '../services/auth.service';
 
 export const authenticateToken = (
 	req: Request,
@@ -18,6 +22,10 @@ export const authenticateToken = (
 	if (!result) {
 		return res.status(403).json({ message: 'Forbidden' });
 	}
+
+	const payload = decodeTokenPayload(token as string);
+
+	req.body.user = payload;
 
 	return next();
 };

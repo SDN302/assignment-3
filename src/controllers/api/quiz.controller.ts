@@ -80,33 +80,6 @@ export const deleteQuiz = async (req: Request, res: Response) => {
 
 //------------------------------------------------------------
 
-export const getCapitalQuestions = async (req: Request, res: Response) => {
-	try {
-		const { quizId } = req.params;
-
-		const quiz = await Quiz.findById(quizId)
-			.populate({
-				path: 'questions',
-				select: '-__v',
-				match: {
-					keywords: { $in: ['capital'] },
-				},
-			})
-			.select('-__v')
-			.exec();
-
-		if (!quiz) {
-			return res.status(404).json({ message: 'Quiz not found' });
-		}
-
-		return res.status(200).json(quiz);
-	} catch (error: any) {
-		return res.status(500).json({ error: error.message });
-	}
-};
-
-//------------------------------------------------------------
-
 export const createOneQuestionForQuiz = async (req: Request, res: Response) => {
 	try {
 		const { quizId } = req.params;
@@ -118,6 +91,8 @@ export const createOneQuestionForQuiz = async (req: Request, res: Response) => {
 		}
 
 		const question = new Question(req.body);
+		question.author = req.body.author || null;
+
 		const newQuestion = await question.save();
 
 		quiz.questions.push(newQuestion._id.toString());
@@ -144,7 +119,11 @@ export const createManyQuestionsForQuiz = async (
 			return res.status(404).json({ message: 'Quiz not found' });
 		}
 
-		const questions = req.body.map((question: any) => new Question(question));
+		const questions = req.body.map(
+			(question: any) =>
+				new Question({ ...question, author: question.author || null }),
+		);
+
 		const newQuestions = await Question.insertMany(questions);
 
 		quiz.questions.push(...newQuestions.map((question: any) => question._id));
